@@ -1,4 +1,4 @@
-package com.darius.linkedlist;
+package linkedlist;
 
 public class Node 
 {
