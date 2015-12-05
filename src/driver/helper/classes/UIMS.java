@@ -1,9 +1,10 @@
 package driver.helper.classes;
+import java.util.Random;
+import driver.helper.classes.Conversion;
 
 //This is the user ID management System
 
 public class UIMS {
-
 	
 	public static Boolean isAvailable(String uid)
 	{
@@ -38,6 +39,24 @@ public class UIMS {
 		System.out.println(hashedValue);
 		
 		return 0;
+	}
+	
+	
+	
+	public int[] generateSalt(int k){
+		int IntArraySize = 9;
+		int randomInt = 0;
+		int[] salt = new int[IntArraySize];
+		Random randomGenerator = new Random();
+		
+		for (int i = 0; i < salt.length; i++) {
+			//This guarantees that all integers in salt are odd number
+			while (randomInt%2 == 0){
+				randomInt = randomGenerator.nextInt(k);
+			}
+			salt[i] = randomInt;
+		}
+		return salt;
 	}
 
 }
