@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 import java.math.BigInteger;
-
-=======
 import java.lang.Math;
->>>>>>> e4df0f9679980fe215c1db5bbbca126b033289af
+
 //This is helper class for hash function
 public class Conversion 
 {
