@@ -10,6 +10,8 @@ public class TestDriver
 		
 		for(int i = 0; i < binaryArray.length; ++i)
 			System.out.print(binaryArray[i]);
+		//following line of code is for testing purpose
+		Conversion.BitseqToDigitseq(binaryArray, 4);
 	}
 
 }
