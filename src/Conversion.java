@@ -1,10 +1,10 @@
-
+import java.math.BigInteger;
 
 //This is helper class for hash function
 public class Conversion 
 {
 	//This method will convert a string to an array of binary numbers and return that array
-	public int[] stringToBitseq(String inputString)		
+	public BigInteger stringToBitseq(String inputString)		
 	{
 		int[] binaryArray = new int[inputString.length() * 6];	//Each character will be represented by 6 bits
 		int i = 0;
@@ -19,11 +19,10 @@ public class Conversion
 				binaryArray[i] = bitSeq[j];
 				++i;
 			}
-			
-			//System.out.println(customizedAsciiValue);
-			//System.out.println(binaryInString);
 		}
-		return binaryArray;
+		BigInteger bigNum = bitSeqToBigNum(binaryArray);
+		return bigNum;
+		//return binaryArray;
 	}
 	
 		//This method will convert each character to their customized ascii value, which is mapped for us in the assignment
@@ -60,8 +59,22 @@ public class Conversion
 					bitSeq[i] = remainder;
 					--i;
 			}
-			
 			return bitSeq;
+		}
+		
+		//Convert the binary number to a large integer
+		public BigInteger bitSeqToBigNum(int[] bitSeq)
+		{
+			BigInteger bigNum = new BigInteger("0");
+			
+			int j = 0;
+			for (int i = bitSeq.length - 1; i >= 0; --i)
+			{
+				bigNum = bigNum.add(BigInteger.valueOf((long)(bitSeq[j] * Math.pow(2, i))));
+				++j;
+			}
+			return bigNum;
+			
 		}
 	
 	//This method will convert the array of binary numbers, and this time group them up by 4 bits (k = 4), and convert them to digits

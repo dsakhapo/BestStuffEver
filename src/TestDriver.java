@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 
 public class TestDriver 
 {
@@ -6,10 +7,9 @@ public class TestDriver
 		System.out.println("I am in TestDriver");
 		Conversion conv = new Conversion();
 		
-		int [] binaryArray = conv.stringToBitseq("molly1");
+		BigInteger bigNum  = conv.stringToBitseq("molly1");
 		
-		for(int i = 0; i < binaryArray.length; ++i)
-			System.out.print(binaryArray[i]);
+		System.out.println(bigNum);
 	}
 
 }
