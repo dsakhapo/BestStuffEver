@@ -1,5 +1,4 @@
-
-
+import java.lang.Math;
 //This is helper class for hash function
 public class Conversion 
 {
@@ -65,10 +64,29 @@ public class Conversion
 		}
 	
 	//This method will convert the array of binary numbers, and this time group them up by 4 bits (k = 4), and convert them to digits
-	public int[] BitseqToDigitseq(int[] bitSequence, int k)
+	public static int[] BitseqToDigitseq(int[] bitSequence, int k)
 	{
+		int[] digitSequenceArray = new int[bitSequence.length/k];
+		int[] tempArray = new int[k];
 		
-		return bitSequence;
+		int digitArrayCounter = 0;
+		int bitSeqenceCounter = 0;
+		
+		while (bitSeqenceCounter < bitSequence.length) {
+			for (int i = 0; i < k; i++) {
+				tempArray[i] = bitSequence[bitSeqenceCounter];
+				bitSeqenceCounter++;
+			}
+		
+			int num = 0;
+			for (int j = 0; j < tempArray.length;j++) {
+				num += tempArray[j]*(Math.pow(2, tempArray.length-1-j));
+			}
+			System.out.println(num);
+			digitSequenceArray[digitArrayCounter] = num;
+			digitArrayCounter++;
+		}
+		return digitSequenceArray;
 	}
 	
 }
