@@ -1,4 +1,5 @@
-import java.math.BigInteger;
+package driver.helper.classes;
+import java.math.BigInteger; 
 import java.lang.Math;
 
 //This is helper class for hash function
@@ -23,7 +24,6 @@ public class Conversion
 		}
 		BigInteger bigNum = bitSeqToBigNum(binaryArray);
 		return bigNum;
-		//return binaryArray;
 	}
 	
 		//This method will convert each character to their customized ascii value, which is mapped for us in the assignment
@@ -54,11 +54,11 @@ public class Conversion
 			int i = 5;
 			while(customizedAsciiValue > 0)
 			{
-					remainder = customizedAsciiValue % 2;
-					customizedAsciiValue /= 2;
+				remainder = customizedAsciiValue % 2;
+				customizedAsciiValue /= 2;
 					
-					bitSeq[i] = remainder;
-					--i;
+				bitSeq[i] = remainder;
+				--i;
 			}
 			return bitSeq;
 		}
@@ -79,7 +79,7 @@ public class Conversion
 		}
 	
 	//This method will convert the array of binary numbers, and this time group them up by 4 bits (k = 4), and convert them to digits
-	public static int[] BitseqToDigitseq(int[] bitSequence, int k)
+	public static int[] bitSeqToDigitSeq(int[] bitSequence, int k)
 	{
 		int[] digitSequenceArray = new int[bitSequence.length/k];
 		int[] tempArray = new int[k];
@@ -87,16 +87,18 @@ public class Conversion
 		int digitArrayCounter = 0;
 		int bitSeqenceCounter = 0;
 		
-		while (bitSeqenceCounter < bitSequence.length) {
-			for (int i = 0; i < k; i++) {
+		while (bitSeqenceCounter < bitSequence.length) 
+		{
+			for (int i = 0; i < k; i++) 
+			{
 				tempArray[i] = bitSequence[bitSeqenceCounter];
 				bitSeqenceCounter++;
 			}
 		
 			int num = 0;
-			for (int j = 0; j < tempArray.length;j++) {
+			for (int j = 0; j < tempArray.length;j++) 
 				num += tempArray[j]*(Math.pow(2, tempArray.length-1-j));
-			}
+			
 			System.out.println(num);
 			digitSequenceArray[digitArrayCounter] = num;
 			digitArrayCounter++;
