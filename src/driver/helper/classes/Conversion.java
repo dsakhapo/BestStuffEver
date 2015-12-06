@@ -1,5 +1,8 @@
 package driver.helper.classes;
-import java.math.BigInteger; 
+import java.math.BigInteger;
+
+import sun.security.action.GetBooleanAction;
+
 import java.lang.Math;
 
 //This is helper class for hash function
@@ -8,7 +11,9 @@ public class Conversion
 	//This method will convert a string to an array of binary numbers and return that array
 	public BigInteger stringToBitseq(String inputString)		
 	{
-		int[] binaryArray = new int[inputString.length() * 6];	//Each character will be represented by 6 bits
+		//int[] binaryArray = new int[inputString.length() * 6];	//Each character will be represented by 6 bits
+		int[] binaryArray = new int[inputString.length() * 6];	
+
 		int i = 0;
 
 		for (int oneCharCounter = 0; oneCharCounter < inputString.length(); oneCharCounter++) 
@@ -50,6 +55,9 @@ public class Conversion
 		{
 			int[] bitSeq = new int[6];
 			int remainder = 0;
+			
+			for (int i = 0; i < bitSeq.length; i++)
+				bitSeq[i] = 0;
 			
 			int i = 5;
 			while(customizedAsciiValue > 0)
