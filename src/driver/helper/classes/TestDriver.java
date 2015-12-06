@@ -20,17 +20,14 @@ public class TestDriver
 				ui.add(userId);
 			else
 			{
-				System.out.println("The requested User Id is not available.");
-				pw.println("The requested User Id is not available.");
+				System.out.println("User Id is not available");
+				pw.println("User Id is not available");
 			}
-			
 		}
 		
 		ui.outputTable();
 		pw.close();
 		fileScan.close();
-		
-		
 	}
 
 }

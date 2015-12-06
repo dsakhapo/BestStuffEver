@@ -37,9 +37,9 @@ public class UIMS
 		{
 			String userId = userT[hashValue].findUserId(uid);
 			if(userId.equals("-1"))
-				return false;
-			else
 				return true;
+			else
+				return false;
 		}
 	}
 	
