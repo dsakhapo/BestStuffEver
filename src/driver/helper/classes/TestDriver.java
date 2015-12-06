@@ -15,13 +15,20 @@ public class TestDriver
 		while(fileScan.hasNext())
 		{
 			userId = fileScan.nextLine();
+
 			if(ui.isAvailable(userId))
 				ui.add(userId);
 			else
+			{
 				System.out.println("The requested User Id is not available.");
+				pw.println("The requested User Id is not available.");
+			}
+			
 		}
 		
 		ui.outputTable();
+		pw.close();
+		fileScan.close();
 		
 		
 	}

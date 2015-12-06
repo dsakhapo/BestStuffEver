@@ -1,5 +1,4 @@
 package driver.helper.classes;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Random;
 import driver.helper.classes.Conversion;
@@ -79,20 +78,25 @@ public class UIMS
 	//This method will hash the userId and return the hash value
 	public int hash(String uid)
 	{
-		BigInteger hashFunction;
+		BigInteger userId, salt, compare;
 		
-		BigDecimal modValue = BigDecimal.valueOf(Math.pow(2, binaryArray.length));
-		BigDecimal denominator = BigDecimal.valueOf(Math.pow(2, binaryArray.length) / Math.pow(2, 10));
-		BigInteger mValue = modValue.toBigInteger();
-		BigInteger denom = denominator.toBigInteger();
-		
-		BigInteger userId, salt;
-		binaryArray = conv.stringToBitseq(uid);		//Get the userId's binary array
-		
+		binaryArray = conv.stringToBitseq(uid);
 		userId = conv.bitSeqToBigNum(binaryArray);		//Convert the binary array to a BigInt
 		salt = generateSalt(50, binaryArray.length);	//Get a random BigInt to hash with
+		compare = new BigInteger("1");
 		
-		hashFunction = (((salt.multiply(userId)).mod(mValue)).divide(denom));
+		BigInteger hashFunction;
+		
+		BigInteger exp = new BigInteger("2");
+		BigInteger modValue = exp.pow(binaryArray.length);
+		
+		BigInteger tableSize = exp.pow(10);
+		BigInteger denominator = modValue.divide(tableSize);
+		if(denominator.compareTo(compare) == -1)
+			denominator = new BigInteger("1");
+			
+		
+		hashFunction = (((salt.multiply(userId)).mod(modValue)).divide(denominator));
 		
 		return hashFunction.intValue();
 		
