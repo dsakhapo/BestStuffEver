@@ -1,6 +1,7 @@
 package hashing;
 import linkedlist.SItem;
 import linkedlist.SLItemList;
+import java.io.*;
 
 public class HashEntry 
 {
@@ -8,23 +9,25 @@ public class HashEntry
 	private String customerId;
 	private SItem n;			//pointer p to traverse the list
 	private SLItemList list;
+	private PrintWriter pw;
 	
-	public HashEntry(String userId, String customerId)
+	public HashEntry(String userId, String customerId, PrintWriter pw)
 	{
+		this.pw = pw;
 		list = new SLItemList();
 		n = new SItem(userId, customerId);
 		list.pushFront(n);
 	}
 	
-	public String getUserId()
+	public String findUserId(String uid)
 	{
-		userId = list.find(userId);
+		userId = list.findUser(uid);
 		return userId;
 	}
 	
-	public String getCustomerId()
+	public String findCustomerId(String uid)
 	{
-		customerId = list.find(customerId);
+		customerId = list.findCustomer(uid);
 		return customerId;
 	}
 	
@@ -32,6 +35,11 @@ public class HashEntry
 	{
 		n = new SItem(userId, customerId);
 		list.pushFront(n);
+	}
+	
+	public void printAllItems()
+	{
+		list.traverse(pw);
 	}
 	
 }

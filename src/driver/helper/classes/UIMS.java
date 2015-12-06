@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.Random;
 import driver.helper.classes.Conversion;
 import hashing.HashEntry;
-
+import java.io.*;
 
 //This is the user ID management System
 
@@ -14,9 +14,11 @@ public class UIMS
 	private HashEntry[] userT;
 	private int cid;
 	private int[] binaryArray;		//userId's binary array
+	private PrintWriter pw;
 	
-	public UIMS()
+	public UIMS(PrintWriter pw)
 	{
+		this.pw = pw;
 		userT = new HashEntry[1024];
 		cid = 0;
 		conv = new Conversion();
@@ -33,7 +35,13 @@ public class UIMS
 		if(userT[hashValue] == null)
 			return true;
 		else
-			return false;
+		{
+			String userId = userT[hashValue].findUserId(uid);
+			if(userId.equals("-1"))
+				return false;
+			else
+				return true;
+		}
 	}
 	
 	//This method will add a new userId to the hash table
@@ -45,7 +53,7 @@ public class UIMS
 		{
 			++cid;
 			String custId = Integer.toString(cid);
-			userT[hashValue] = new HashEntry(uid, custId);
+			userT[hashValue] = new HashEntry(uid, custId, pw);
 		}
 		else
 		{
@@ -63,7 +71,9 @@ public class UIMS
 		if(userT[hashValue] == null)		//If the userId doesn't exist, return "-1"
 			return "-1";
 		else
-			return userT[hashValue].getCustomerId();		
+		{
+			return userT[hashValue].findCustomerId(uid);
+		}
 	}
 	
 	//This method will hash the userId and return the hash value
@@ -80,7 +90,7 @@ public class UIMS
 		binaryArray = conv.stringToBitseq(uid);		//Get the userId's binary array
 		
 		userId = conv.bitSeqToBigNum(binaryArray);		//Convert the binary array to a BigInt
-		salt = generateSalt(10, binaryArray.length);	//Get a random BigInt to hash with
+		salt = generateSalt(50, binaryArray.length);	//Get a random BigInt to hash with
 		
 		hashFunction = (((salt.multiply(userId)).mod(mValue)).divide(denom));
 		
@@ -120,6 +130,21 @@ public class UIMS
 			}
 		}
 		return conv.bitSeqToBigNum(saltInBits);
+	}
+	
+	public void outputTable()
+	{
+		for(int i = 0; i < userT.length; ++i)
+		{
+			if(userT[i] != null)
+			{
+				System.out.print(i + " - ");
+				pw.print(i + " - ");
+				userT[i].printAllItems();
+				System.out.print("\n");
+				pw.print("\r\n");
+			}
+		}
 	}
 
 }

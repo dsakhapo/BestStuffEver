@@ -1,4 +1,5 @@
 package linkedlist;
+import java.io.*;
 //Singly Linked Item List
 public class SLItemList 
 {
@@ -22,14 +23,14 @@ public class SLItemList
 		}
 	}
 	
-	public String find(String s)
+	public String findUser(String s)
 	{
 		boolean found = false;
 		
 		p = first;
 		while (p != null)
 		{
-			if(p.getUserId().equals(s) || p.getCustomerId().equals(s))
+			if(p.getUserId().equals(s))
 			{
 				found = true;
 				break;
@@ -41,5 +42,28 @@ public class SLItemList
 			return s;
 		else
 			return "-1";
+	}
+	
+	public String findCustomer(String s)
+	{
+		p = first;
+		while(p != null)
+		{
+			if(p.getUserId().equals(s))
+				return p.getCustomerId();
+			p = p.getLink();
+		}
+		return "-1";
+	}
+	
+	public void traverse(PrintWriter pw)
+	{
+		p = first;
+		while(p != null)
+		{
+			System.out.print(p.getUserId() + ", ");
+			pw.print(p.getUserId() + ", ");
+			p = p.getLink();
+		}
 	}
 }

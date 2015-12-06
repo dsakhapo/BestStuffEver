@@ -1,18 +1,29 @@
 package driver.helper.classes;
-import java.math.BigInteger;
-
+import java.io.*;
+import java.util.Scanner;
 
 public class TestDriver 
 {
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException
 	{
-		System.out.println("I am in TestDriver");
-		Conversion conv = new Conversion();
+		Scanner fileScan = new Scanner(new File("INPUT"));
+		PrintWriter pw = new PrintWriter(new FileWriter("OUTPUT"));
 		
-		BigInteger bigNum  = conv.stringToBitseq("molly1");
+		UIMS ui = new UIMS(pw);
+		String userId;
 		
-		System.out.println(bigNum);
-
+		while(fileScan.hasNext())
+		{
+			userId = fileScan.nextLine();
+			if(ui.isAvailable(userId))
+				ui.add(userId);
+			else
+				System.out.println("The requested User Id is not available.");
+		}
+		
+		ui.outputTable();
+		
+		
 	}
 
 }
