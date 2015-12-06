@@ -2,16 +2,15 @@ package linkedlist;
 //Singly Linked Item List
 public class SLItemList 
 {
-	private SItem n, first, p;
+	private SItem first, p;
 	
 	public SLItemList()
 	{
-		n = first = p = null;
+		first = p = null;
 	}
 	
 	public void pushFront(SItem n)
 	{
-		this.n = n;
 		n.setLink(null);
 		
 		if(first == null)
@@ -25,22 +24,22 @@ public class SLItemList
 	
 	public String find(String s)
 	{
-		boolean match = false;
-		String notFound = "The user Id or customer Id was not found";
+		boolean found = false;
 		
 		p = first;
 		while (p != null)
 		{
 			if(p.getUserId().equals(s) || p.getCustomerId().equals(s))
 			{
-				match = true;
+				found = true;
 				break;
 			}
 			p = p.getLink();
 		}
-		if(match == false)
-			return notFound;
-		else
+		
+		if(found == true)
 			return s;
+		else
+			return "-1";
 	}
 }
